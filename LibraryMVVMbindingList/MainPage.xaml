@@ -1,0 +1,73 @@
+﻿<Page
+    x:Class="LibraryMVVMbindingList.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LibraryMVVMbindingList"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.DataContext>
+        <local:ViewModel></local:ViewModel>
+
+    </Page.DataContext>
+
+
+
+
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+            <ListView ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <!-- 'Styler' elementer i listen -->
+                        <StackPanel>
+                            <TextBlock Text="{Binding Title}"></TextBlock>
+                            <TextBlock Text="Udlånt til: "></TextBlock>
+                            <TextBlock Text="{Binding Loaner}"></TextBlock>
+
+
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <MenuFlyoutSeparator></MenuFlyoutSeparator>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+
+
+
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Author: "></TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="1" FontStyle="Italic" Text="{Binding SelectedBook.Author}"></TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="ISBN: "></TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SelectedBook.Isbn}"></TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Title: "></TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="1" FontWeight="ExtraBold" Text="{Binding SelectedBook.Title}"></TextBlock>
+                <TextBox Grid.Row="3" Grid.Column="1" ></TextBox>
+                <Button Grid.Row="3" Grid.Column="0" Content="Udlån bog" Command="{Binding LoanBookCommand}"></Button>
+            </Grid>
+        </StackPanel>
+        <ListView HorizontalAlignment="Left" Height="100" Margin="1476,2192,0,0" VerticalAlignment="Top" Width="100"/>
+
+
+
+
+
+    </Grid>
+
+</Page>
